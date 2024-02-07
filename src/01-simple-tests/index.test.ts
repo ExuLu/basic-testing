@@ -19,6 +19,8 @@ describe('simpleCalculator tests', () => {
 
   test('should divide two numbers', () => {
     // Write your test here
+    expect(simpleCalculator({ a: 16, b: 4, action: Action.Divide })).toBe(4);
+    expect(simpleCalculator({ a: 5, b: 2, action: Action.Divide })).toBe(2.5);
   });
 
   test('should exponentiate two numbers', () => {
