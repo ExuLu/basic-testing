@@ -1,6 +1,6 @@
 // Uncomment the code below and write your tests
 import {
-  // throwError,
+  throwError,
   // throwCustomError,
   resolveValue,
   // MyAwesomeError,
@@ -20,11 +20,13 @@ describe('resolveValue', () => {
 
 describe('throwError', () => {
   test('should throw error with provided message', () => {
-    // Write your test here
+    const result = () => throwError('Some error');
+    expect(result).toThrowError('Some error');
   });
 
   test('should throw error with default message if message is not provided', () => {
-    // Write your test here
+    const result = () => throwError();
+    expect(result).toThrow('Oops!');
   });
 });
 
