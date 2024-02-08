@@ -10,7 +10,7 @@ const testCases = [
 
 describe('simpleCalculator', () => {
   test.each(testCases)(
-    'Should correctly implement action with numbers a and b',
+    'Should return $expected when $a $action $b',
     ({ a, b, action, expected }) => {
       const result = simpleCalculator({ a, b, action });
       expect(result).toBe(expected);
