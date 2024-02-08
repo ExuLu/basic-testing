@@ -1,10 +1,10 @@
 // Uncomment the code below and write your tests
 import {
   throwError,
-  // throwCustomError,
+  throwCustomError,
   resolveValue,
-  // MyAwesomeError,
-  // rejectCustomError,
+  MyAwesomeError,
+  rejectCustomError,
 } from './index';
 
 describe('resolveValue', () => {
@@ -32,12 +32,14 @@ describe('throwError', () => {
 
 describe('throwCustomError', () => {
   test('should throw custom error', () => {
-    // Write your test here
+    const result = () => throwCustomError();
+    expect(result).toThrow(MyAwesomeError);
   });
 });
 
 describe('rejectCustomError', () => {
   test('should reject custom error', async () => {
-    // Write your test here
+    const result = () => rejectCustomError();
+    await expect(result).rejects.toThrow(MyAwesomeError);
   });
 });
