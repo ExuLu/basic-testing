@@ -5,7 +5,18 @@ const testCases = [
   { a: 1, b: 2, action: Action.Add, expected: 3 },
   { a: 2, b: 2, action: Action.Add, expected: 4 },
   { a: 3, b: 2, action: Action.Add, expected: 5 },
-  // continue cases for other actions
+  { a: 3, b: 2, action: Action.Subtract, expected: 1 },
+  { a: 2, b: 2, action: Action.Subtract, expected: 0 },
+  { a: 5, b: 2, action: Action.Subtract, expected: 3 },
+  { a: 4, b: 2, action: Action.Multiply, expected: 8 },
+  { a: 2, b: 2, action: Action.Multiply, expected: 4 },
+  { a: 3, b: 3, action: Action.Multiply, expected: 9 },
+  { a: 9, b: 3, action: Action.Divide, expected: 3 },
+  { a: 8, b: 2, action: Action.Divide, expected: 4 },
+  { a: 25, b: 5, action: Action.Divide, expected: 5 },
+  { a: 3, b: 4, action: Action.Exponentiate, expected: 81 },
+  { a: 2, b: 4, action: Action.Exponentiate, expected: 16 },
+  { a: 3, b: 2, action: Action.Exponentiate, expected: 9 },
 ];
 
 describe('simpleCalculator', () => {
