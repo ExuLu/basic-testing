@@ -98,10 +98,16 @@ describe('simpleCalculator tests', () => {
       b: 2,
       action: Action.Add,
     });
+    const result6 = simpleCalculator({
+      a: undefined,
+      b: 2,
+      action: Action.Add,
+    });
     expect(result1).toBeNull();
     expect(result2).toBeNull();
     expect(result3).toBeNull();
     expect(result4).toBeNull();
     expect(result5).toBeNull();
+    expect(result6).toBeNull();
   });
 });
