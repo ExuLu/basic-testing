@@ -3,7 +3,6 @@ import {
   BankAccount,
   InsufficientFundsError,
   SynchronizationFailedError,
-  // SynchronizationFailedError,
   TransferFailedError,
   getBankAccount,
 } from '.';
