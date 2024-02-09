@@ -10,18 +10,22 @@ describe('doStuffByTimeout', () => {
     jest.useRealTimers();
   });
 
+  const callback = jest.fn();
+  const timeout = 1000;
+
   test('should set timeout with provided callback and timeout', () => {
     jest.spyOn(global, 'setTimeout');
-    const callback = jest.fn();
-    const timeout = 1000;
     doStuffByTimeout(callback, timeout);
-    jest.runAllTimers();
     expect(setTimeout).toBeCalledTimes(1);
     expect(setTimeout).toHaveBeenLastCalledWith(callback, timeout);
   });
 
   test('should call callback only after timeout', () => {
-    // Write your test here
+    jest.spyOn(global, 'setTimeout');
+    doStuffByTimeout(callback, timeout);
+    expect(callback).not.toBeCalled();
+    jest.runAllTimers();
+    expect(callback).toBeCalled();
   });
 });
 
