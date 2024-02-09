@@ -46,14 +46,17 @@ describe('doStuffByInterval', () => {
     doStuffByInterval(callback, interval);
     expect(setInterval).toBeCalled();
     expect(setInterval).toBeCalledWith(callback, interval);
+
+    // Clear all timers cause without it they will be called in the second test
+    jest.clearAllTimers();
   });
 
   test('should call callback multiple times after multiple intervals', () => {
     jest.spyOn(global, 'setInterval');
     doStuffByInterval(callback, interval);
     expect(callback).not.toBeCalled();
-    jest.runOnlyPendingTimers();
-    expect(callback).toBeCalled();
+    jest.advanceTimersByTime(3000);
+    expect(callback).toBeCalledTimes(3);
   });
 });
 
