@@ -5,6 +5,7 @@ import {
   TransferFailedError,
   getBankAccount,
 } from '.';
+import _ from 'lodash';
 
 describe('BankAccount', () => {
   test('should create account with initial balance', () => {
@@ -70,7 +71,12 @@ describe('BankAccount', () => {
   });
 
   test('fetchBalance should return number in case if request did not failed', async () => {
-    // Write your tests here
+    const account = getBankAccount(100);
+    const spyFn = jest.spyOn(_, 'random');
+    spyFn.mockReturnValueOnce(10).mockReturnValueOnce(99);
+    const resultOne = await account.fetchBalance();
+    expect(spyFn.mock.calls).toHaveLength(2);
+    expect(resultOne).toEqual(expect.any(Number));
   });
 
   test('should set new balance if fetchBalance returned number', async () => {
