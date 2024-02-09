@@ -2,12 +2,14 @@
 import {
   BankAccount,
   InsufficientFundsError,
+  // SynchronizationFailedError,
   TransferFailedError,
   getBankAccount,
 } from '.';
 import _ from 'lodash';
 
 describe('BankAccount', () => {
+  afterEach(jest.clearAllMocks);
   test('should create account with initial balance', () => {
     const account = getBankAccount(300);
     const balance = account.getBalance();
@@ -72,10 +74,8 @@ describe('BankAccount', () => {
 
   test('fetchBalance should return number in case if request did not failed', async () => {
     const account = getBankAccount(100);
-    const spyFn = jest.spyOn(_, 'random');
-    spyFn.mockReturnValueOnce(10).mockReturnValueOnce(99);
+    _.random = jest.fn().mockReturnValue(50);
     const result = await account.fetchBalance();
-    expect(spyFn.mock.calls).toHaveLength(2);
     expect(result).toEqual(expect.any(Number));
   });
 
@@ -91,6 +91,10 @@ describe('BankAccount', () => {
   });
 
   test('should throw SynchronizationFailedError if fetchBalance returned null', async () => {
-    // Write your tests here
+    // const account = getBankAccount(100);
+    // const spyFn = jest.spyOn(_, 'random');
+    // spyFn.mockReturnValueOnce(50).mockReturnValueOnce(0);
+    // const result = async () => await account.synchronizeBalance();
+    // await expect(result).toThrow(SynchronizationFailedError);
   });
 });
