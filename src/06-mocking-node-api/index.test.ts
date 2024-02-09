@@ -72,9 +72,8 @@ describe('readFileAsynchronously', () => {
   });
 
   test('should return null if file does not exist', async () => {
-    // Write your test here
     const pathToFile = './text.txt';
-    fs.existsSync = jest.fn(() => false);
+    fs.existsSync = jest.fn().mockReturnValueOnce(false);
     const result = await readFileAsynchronously(pathToFile);
     expect(result).toBeNull();
   });
