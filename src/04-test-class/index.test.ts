@@ -36,13 +36,19 @@ describe('BankAccount', () => {
   });
 
   test('should deposit money', () => {
-    const newAccount = getBankAccount(100);
-    const result = newAccount.deposit(400);
+    const account = getBankAccount(100);
+    const result = account.deposit(400);
+    const balance = account.getBalance();
     expect(result).toEqual({ _balance: 500 });
+    expect(balance).toBe(500);
   });
 
   test('should withdraw money', () => {
-    // Write your test here
+    const account = getBankAccount(400);
+    const result = account.withdraw(300);
+    const balance = account.getBalance();
+    expect(result).toEqual({ _balance: 100 });
+    expect(balance).toBe(100);
   });
 
   test('should transfer money', () => {
