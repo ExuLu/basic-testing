@@ -74,13 +74,20 @@ describe('BankAccount', () => {
     const account = getBankAccount(100);
     const spyFn = jest.spyOn(_, 'random');
     spyFn.mockReturnValueOnce(10).mockReturnValueOnce(99);
-    const resultOne = await account.fetchBalance();
+    const result = await account.fetchBalance();
     expect(spyFn.mock.calls).toHaveLength(2);
-    expect(resultOne).toEqual(expect.any(Number));
+    expect(result).toEqual(expect.any(Number));
   });
 
   test('should set new balance if fetchBalance returned number', async () => {
-    // Write your tests here
+    const account = getBankAccount(100);
+    const spyFn = jest.spyOn(_, 'random');
+    spyFn.mockReturnValueOnce(50).mockReturnValueOnce(5);
+    await account.synchronizeBalance();
+    const balance = account.getBalance();
+    expect(spyFn.mock.calls).toHaveLength(2);
+    expect(balance).toBe(50);
+    expect(account).toEqual({ _balance: 50 });
   });
 
   test('should throw SynchronizationFailedError if fetchBalance returned null', async () => {
