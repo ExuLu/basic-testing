@@ -12,12 +12,20 @@ describe('throttledGetDataFromApi', () => {
   ];
   const path = './path';
 
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
   test('should create instance with provided base url', async () => {
     const baseURL = 'https://jsonplaceholder.typicode.com';
     mockAxios.create.mockReturnThis();
     mockAxios.get.mockResolvedValueOnce(data);
     await throttledGetDataFromApi(path);
-    jest.runAllTimers();
+    jest.runOnlyPendingTimers();
     expect(mockAxios.create).toBeCalledWith({ baseURL: baseURL });
   });
 
