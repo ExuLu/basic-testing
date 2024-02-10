@@ -14,11 +14,11 @@ describe('throttledGetDataFromApi', () => {
 
   test('should create instance with provided base url', async () => {
     const baseURL = 'https://jsonplaceholder.typicode.com';
-    axios.get = jest.fn().mockResolvedValue(data);
+    mockAxios.create.mockReturnThis();
+    mockAxios.get.mockResolvedValueOnce(data);
     await throttledGetDataFromApi(path);
     jest.runAllTimers();
-    const spyCreateAxios = jest.spyOn(axios, 'create');
-    expect(spyCreateAxios).toBeCalledWith({ baseURL: baseURL });
+    expect(mockAxios.create).toBeCalledWith({ baseURL: baseURL });
   });
 
   test('should perform request to correct provided url', async () => {
