@@ -26,6 +26,8 @@ describe('throttledGetDataFromApi', () => {
     mockAxios.create.mockReturnThis();
     mockAxios.get.mockResolvedValueOnce(res);
     await throttledGetDataFromApi(path);
+
+    // Add this function here and further, because of problem after run tests: 'A worker process has failed to exit gracefully and has been force exited'
     jest.runOnlyPendingTimers();
     expect(mockAxios.create).toBeCalledWith({ baseURL: baseURL });
   });
