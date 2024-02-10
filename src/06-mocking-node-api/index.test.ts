@@ -2,6 +2,7 @@
 import path, { join } from 'path';
 import { doStuffByInterval, doStuffByTimeout, readFileAsynchronously } from '.';
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 
 describe('doStuffByTimeout', () => {
   beforeAll(() => {
@@ -79,6 +80,11 @@ describe('readFileAsynchronously', () => {
   });
 
   test('should return file content if file exists', async () => {
-    // Write your test here
+    const pathToFile = './text.txt';
+    const fileContent = 'File content';
+    fs.existsSync = jest.fn().mockReturnValueOnce(true);
+    fsPromises.readFile = jest.fn().mockResolvedValueOnce(fileContent);
+    const result = await readFileAsynchronously(pathToFile);
+    expect(result).toBe(fileContent);
   });
 });
