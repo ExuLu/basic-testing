@@ -10,6 +10,7 @@ describe('throttledGetDataFromApi', () => {
     { id: 1, user: 'Bob' },
     { id: 2, user: 'Jason' },
   ];
+  const res = { data };
   const path = './path';
 
   beforeAll(() => {
@@ -23,7 +24,7 @@ describe('throttledGetDataFromApi', () => {
   test('should create instance with provided base url', async () => {
     const baseURL = 'https://jsonplaceholder.typicode.com';
     mockAxios.create.mockReturnThis();
-    mockAxios.get.mockResolvedValueOnce(data);
+    mockAxios.get.mockResolvedValueOnce(res);
     await throttledGetDataFromApi(path);
     jest.runOnlyPendingTimers();
     expect(mockAxios.create).toBeCalledWith({ baseURL: baseURL });
@@ -31,13 +32,17 @@ describe('throttledGetDataFromApi', () => {
 
   test('should perform request to correct provided url', async () => {
     mockAxios.create.mockReturnThis();
-    mockAxios.get.mockResolvedValueOnce(data);
+    mockAxios.get.mockResolvedValueOnce(res);
     await throttledGetDataFromApi(path);
     jest.runOnlyPendingTimers();
     expect(mockAxios.create().get).toBeCalledWith(path);
   });
 
   test('should return response data', async () => {
-    // Write your test here
+    mockAxios.create.mockReturnThis();
+    mockAxios.get.mockResolvedValueOnce(res);
+    const result = await throttledGetDataFromApi(path);
+    jest.runOnlyPendingTimers();
+    expect(result).toEqual(data);
   });
 });
