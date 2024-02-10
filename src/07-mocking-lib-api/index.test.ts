@@ -30,7 +30,11 @@ describe('throttledGetDataFromApi', () => {
   });
 
   test('should perform request to correct provided url', async () => {
-    // Write your test here
+    mockAxios.create.mockReturnThis();
+    mockAxios.get.mockResolvedValueOnce(data);
+    await throttledGetDataFromApi(path);
+    jest.runOnlyPendingTimers();
+    expect(mockAxios.create().get).toBeCalledWith(path);
   });
 
   test('should return response data', async () => {
